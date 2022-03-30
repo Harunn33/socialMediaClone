@@ -52,7 +52,21 @@ class _AnasayfaState extends State<Anasayfa> {
               color: Colors.green.shade400,
               size: 33.0,
             ),
-            onPressed: () => {},
+            onPressed: () => {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Column(
+                      children: <Widget>[
+                        notifications("Kamil seni dürttü", "3 hafta önce"),
+                        notifications(
+                            "Ali fotoğrafına yorum bıraktı", "3 dk önce"),
+                        notifications("Ahmet seni beğendi", "3 hafta önce"),
+                        notifications("Kerim seni etiketledi", "3 saat önce"),
+                      ],
+                    );
+                  })
+            },
           ),
         ],
       ),
@@ -125,6 +139,30 @@ class _AnasayfaState extends State<Anasayfa> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.green.shade700,
+        child: Icon(
+          Icons.add_a_photo,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  Padding notifications(String notifText, String notifTime) {
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            notifText,
+            style: TextStyle(fontSize: 16),
+          ),
+          Text(notifTime)
+        ],
+      ),
     );
   }
 
@@ -132,8 +170,8 @@ class _AnasayfaState extends State<Anasayfa> {
       String backgroundImage, String description, String time) {
     return Material(
       child: InkWell(
-        onTap: () {
-          Navigator.push(context,
+        onTap: () async {
+          String data = await Navigator.push(context,
               MaterialPageRoute(builder: (BuildContext context) {
             return ProfilePage(
               profilePhoto: imageLink,
@@ -144,6 +182,7 @@ class _AnasayfaState extends State<Anasayfa> {
               time: time,
             );
           }));
+          print(data);
         },
         child: Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -152,18 +191,21 @@ class _AnasayfaState extends State<Anasayfa> {
               Stack(
                 alignment: Alignment.topRight,
                 children: <Widget>[
-                  Container(
-                    width: 70.0,
-                    height: 70.0,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          width: 2.0,
-                          color: Colors.grey,
-                          style: BorderStyle.solid),
-                      borderRadius: BorderRadius.circular(70.0),
-                      image: DecorationImage(
-                          image: AssetImage(imageLink), fit: BoxFit.cover),
+                  Hero(
+                    tag: username,
+                    child: Container(
+                      width: 70.0,
+                      height: 70.0,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                            width: 2.0,
+                            color: Colors.grey,
+                            style: BorderStyle.solid),
+                        borderRadius: BorderRadius.circular(70.0),
+                        image: DecorationImage(
+                            image: AssetImage(imageLink), fit: BoxFit.cover),
+                      ),
                     ),
                   ),
                   Container(

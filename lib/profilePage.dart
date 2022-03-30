@@ -38,15 +38,18 @@ class ProfilePage extends StatelessWidget {
                 Positioned(
                   left: 15,
                   bottom: 0,
-                  child: Container(
-                    width: 120,
-                    height: 120,
-                    decoration: BoxDecoration(
-                        image:
-                            DecorationImage(image: AssetImage("$profilePhoto")),
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(60.0),
-                        border: Border.all(width: 2.0, color: Colors.white)),
+                  child: Hero(
+                    tag: "$username",
+                    child: Container(
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("$profilePhoto")),
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(60.0),
+                          border: Border.all(width: 2.0, color: Colors.white)),
+                    ),
                   ),
                 ),
                 Positioned(
@@ -104,7 +107,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 IconButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pop(context, "Geri");
                     },
                     icon: Icon(Icons.arrow_back))
               ],
