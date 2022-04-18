@@ -62,7 +62,7 @@ class _AnasayfaState extends State<Anasayfa> {
                         notifications(
                             "Ali fotoğrafına yorum bıraktı", "3 dk önce"),
                         notifications("Ahmet seni beğendi", "3 hafta önce"),
-                        notifications("Kerim seni etiketledi", "3 saat önce"),
+                        notifications("Kerim seni siktiiiii", "3 saat önce"),
                       ],
                     );
                   })
